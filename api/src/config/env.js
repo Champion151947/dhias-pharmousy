@@ -26,6 +26,8 @@ const isProd = (process.env.NODE_ENV ?? 'development') === 'production';
 const jwtSecret = process.env.JWT_SECRET?.trim() || '';
 
 if (isProd && jwtSecret.length < 32) {
+  // There is no safe default for this one: a guessable signing key would let
+  // anyone mint a valid admin session, so the app refuses to start.
   throw new Error(
     'JWT_SECRET must be set to at least 32 characters in production. ' +
       'Generate one with: node -e "console.log(require(\'crypto\').randomBytes(48).toString(\'hex\'))"',
@@ -33,24 +35,21 @@ if (isProd && jwtSecret.length < 32) {
 }
 
 /**
- * The development admin password is intentionally a weak, well-known value so
- * a fresh clone is usable with zero setup. It is never accepted in production:
- * the store refuses to seed an admin account unless a strong password is
- * supplied through the environment, so a public repository cannot hand out a
- * working admin login.
+ * Demo mode.
+ *
+ * A public demo should be clickable by anyone, so when ADMIN_PASSWORD is not
+ * supplied the app falls back to a well-known demo password instead of
+ * refusing to boot. That is a deliberate trade: anyone who reads the source
+ * can sign in as admin and change the demo data.
+ *
+ * Set ADMIN_PASSWORD to any 12+ character value to turn demo mode off, and the
+ * app will use it and stop publishing the demo accounts.
  */
 const DEMO_ADMIN_PASSWORD = 'Admin@12345';
 const adminPassword = process.env.ADMIN_PASSWORD?.trim() || '';
 const hasStrongAdminPassword =
   adminPassword.length >= 12 && adminPassword !== DEMO_ADMIN_PASSWORD;
-
-if (isProd && !hasStrongAdminPassword) {
-  throw new Error(
-    'ADMIN_PASSWORD must be set to at least 12 characters in production and ' +
-      'must not be the development default. Generate a strong one with: ' +
-      'node -e "console.log(require(\'crypto\').randomBytes(18).toString(\'base64url\'))"',
-  );
-}
+const isDemo = !hasStrongAdminPassword;
 
 export const config = {
   env: process.env.NODE_ENV ?? 'development',
@@ -75,6 +74,7 @@ export const config = {
     jwtExpiresIn: process.env.JWT_EXPIRES_IN?.trim() || '7d',
     bcryptRounds: num(process.env.BCRYPT_ROUNDS, 10),
     hasStrongAdminPassword,
+    isDemo,
     admin: {
       email: (process.env.ADMIN_EMAIL?.trim() || 'admin@dhiaspharmousy.in').toLowerCase(),
       password: hasStrongAdminPassword ? adminPassword : DEMO_ADMIN_PASSWORD,

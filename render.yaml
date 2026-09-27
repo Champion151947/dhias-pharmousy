@@ -15,9 +15,13 @@
 # and uncomment the `disk` block at the bottom, or deploy to a host with a
 # real volume and set DATA_DIR to its mount point.
 #
-# You must supply ADMIN_PASSWORD when Render prompts. The app refuses to
-# start in production without a strong one, and it never accepts the
-# development default that appears in the README.
+# You do NOT need to set a password. The blueprint deploys in demo mode, so
+# the site is immediately clickable and the demo accounts below are published
+# in the README. Anyone who reads the source can sign in as admin and edit
+# this data, which is fine for a demo and is why the free plan resets storage.
+#
+# To turn demo mode off later: set ADMIN_PASSWORD to any 12+ character value
+# in the Render dashboard.
 # ---------------------------------------------------------------------------
 
 services:
@@ -43,9 +47,11 @@ services:
       - key: JWT_SECRET
         generateValue: true
 
-      # REQUIRED: Render will prompt you for this value during creation.
+      # OPTIONAL. Leave blank to stay in demo mode, where the published demo
+      # credentials work and the site is clickable by anyone. Set any 12+
+      # character value to disable demo mode.
       - key: ADMIN_PASSWORD
-        sync: false
+        value: ""
 
       - key: ADMIN_EMAIL
         value: admin@dhiaspharmousy.in
@@ -65,9 +71,9 @@ services:
 
       # Shown on invoices and in the storefront footer. Replace these.
       - key: GSTIN
-        sync: false
+        value: ""
       - key: DRUG_LICENSE_NUMBER
-        sync: false
+        value: ""
 
       # ------------------------------------------------------------------------
       # Persistent storage. Requires a paid `starter` plan; uncomment together

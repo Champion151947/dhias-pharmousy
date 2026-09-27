@@ -113,12 +113,11 @@ export async function buildSeedData() {
 
   const admin = config.auth.admin;
 
-  // The demo customer's password is a constant in this file, so seeding it in
-  // production would publish a working login for anyone who clones the repo.
-  // It only ever exists in development. The admin is always created, and in
-  // production `config` has already refused to boot unless ADMIN_PASSWORD was a
-  // strong value from the environment.
-  const seedDemoCustomer = config.isDev;
+  // The demo customer's password is a constant in this file, so it is only ever
+  // seeded when the deployment is a demo: in development, or on a public demo
+  // running without a real ADMIN_PASSWORD. Setting a strong ADMIN_PASSWORD
+  // turns demo mode off and creates the admin account only.
+  const seedDemoCustomer = config.isDev || config.auth.isDemo;
 
   const usersRows = [
     {

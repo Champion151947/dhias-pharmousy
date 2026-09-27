@@ -34,6 +34,13 @@ async function main() {
     console.log(`  Data     ${DATA_FILE}`);
     console.log(`  Payments ${config.payments.mode} (cash on delivery)`);
     console.log(`  OTP      ${config.otp.provider}`);
+    if (config.auth.isDemo) {
+      console.log('');
+      console.log('  ! DEMO MODE');
+      console.log('  Anyone can sign in with the published demo credentials and edit');
+      console.log('  this data. Set ADMIN_PASSWORD to any 12+ character value to turn');
+      console.log('  demo mode off.');
+    }
     console.log('');
   });
 

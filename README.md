@@ -42,7 +42,7 @@ npm run serve     # builds the SPA, then starts the server
 
 Then open http://localhost:4000
 
-### Demo accounts (development only)
+### Demo accounts
 
 | Role | Email | Password |
 | --- | --- | --- |
@@ -79,17 +79,21 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 
 ---
 
-## Security in production
+## Demo mode
 
-The app **refuses to boot** when `NODE_ENV=production` and either of these is
-missing or weak:
+By default the app runs as a **public demo**: no password to configure, and the
+accounts above work everywhere, including on a deployed URL.
 
-- `JWT_SECRET` shorter than 32 characters
-- `ADMIN_PASSWORD` shorter than 12 characters, or still set to the documented
-  development default
+In this mode anyone can sign in as admin and change the data. That is the
+intended trade for a demo, and the server prints a `! DEMO MODE` warning at
+startup so it is never a surprise.
 
-In production the seed creates only the admin account. The demo customer is
-skipped entirely, because its password is a constant in this source tree.
+To turn it off, set `ADMIN_PASSWORD` to any 12+ character value. The app then
+uses your password and stops creating the demo accounts.
+
+`JWT_SECRET` is the one thing that is never optional in production: a
+guessable signing key would let anyone mint a valid admin session, so the app
+refuses to start without a 32+ character value. Render generates it for you.
 
 Payments are **cash on delivery only**; there is no payment gateway and no
 card data is ever collected. Orders containing Rx items are rejected by the
@@ -127,6 +131,20 @@ choice — put a real database behind `api/src/store/index.js` instead.
 ---
 
 ## Deploying
+
+### As a public demo (one command, no card, no password)
+
+```bash
+gh render blueprint launch
+```
+
+`render.yaml` is fully zero-config: Render generates `JWT_SECRET` and every
+other variable has a default, so nothing is prompted. The command prints your
+live `onrender.com` URL when the build finishes, and the demo accounts above
+work on it immediately.
+
+The free plan has no persistent disk and sleeps when idle, so data resets on
+each deploy. That is fine for a demo, and is why demo mode is the default here.
 
 ### Free hosting that keeps your data
 
