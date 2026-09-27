@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-label="Home Delivery Across Ollur">
+  <defs>
+    <linearGradient id="bn-bhomedeliveryacrossollur1" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0%" stop-color="#1a504c"/>
+      <stop offset="100%" stop-color="#1a504c" stop-opacity="0.66"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="460" fill="url(#bn-bhomedeliveryacrossollur1)"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2">
+    <circle cx="1040" cy="230" r="132"/>
+    <circle cx="1040" cy="230" r="98"/>
+    <circle cx="1040" cy="230" r="64"/>
+  </g>
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#ffffff">
+    <text x="76" y="214" font-size="54" font-weight="700">Home Delivery Across</text>
+    <text x="76" y="270" font-size="54" font-weight="700">Ollur</text>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+coverage/
+.vite/
+
+# The live dataset and uploaded prescriptions. The seed data in
+# api/src/store/seed-data.js regenerates these, so a clone stays demo-able
+# without committing them.
+data/db.json
+data/db.json.*.tmp
+data/uploads/

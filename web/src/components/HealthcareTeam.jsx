@@ -1,0 +1,242 @@
+export function HealthcareTeam({ width = 300, height = 300, ...props }) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
+      <defs>
+        <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fdbcb4"/>
+          <stop offset="100%" stopColor="#f5a995"/>
+        </linearGradient>
+        <linearGradient id="coatGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#ffffff"/>
+          <stop offset="100%" stopColor="#e8f5f5"/>
+        </linearGradient>
+        <linearGradient id="scrubsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#0d9488"/>
+          <stop offset="100%" stopColor="#06b6d4"/>
+        </linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      
+      <g className="doctor-1" transform="translate(80,150)" filter="url(#glow)">
+        <animateTransform attributeName="transform" type="translate" values="80,150; 85,145; 80,150" dur="5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1"/>
+        
+        <path d="M-30,10 Q-40,40 -30,80 Q-20,100 -10,100 L10,100 Q20,100 30,80 Q40,40 30,10 Z" fill="url(#coatGrad)" stroke="#e0e0e0" strokeWidth="1">
+          <animate attributeName="d" values="M-30,10 Q-40,40 -30,80 Q-20,100 -10,100 L10,100 Q20,100 30,80 Q40,40 30,10 Z; M-30,10 Q-38,42 -30,82 Q-20,102 -10,102 L10,102 Q20,102 30,82 Q38,42 30,10 Z; M-30,10 Q-40,40 -30,80 Q-20,100 -10,100 L10,100 Q20,100 30,80 Q40,40 30,10 Z" dur="4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1"/>
+        </path>
+        
+        <path d="M-15,10 Q-15,30 -10,50 L10,50 Q15,30 15,10 Z" fill="#e8f0fe"/>
+        
+        <path d="M-2,15 L-6,40 L2,40 L6,15 Z" fill="#0d9488">
+          <animate attributeName="d" values="M-2,15 L-6,40 L2,40 L6,15 Z; M-2,15 L-5,42 L1,42 L5,15 Z; M-2,15 L-6,40 L2,40 L6,15 Z" dur="3s" repeatCount="indefinite"/>
+        </path>
+        
+        <path d="M-30,20 Q-45,30 -50,50" stroke="url(#coatGrad)" strokeWidth="12" fill="none" strokeLinecap="round">
+          <animate attributeName="d" values="M-30,20 Q-45,30 -50,50; M-30,20 Q-48,35 -52,55; M-30,20 Q-45,30 -50,50" dur="3s" repeatCount="indefinite"/>
+        </path>
+        <path d="M30,20 Q45,30 50,50" stroke="url(#coatGrad)" strokeWidth="12" fill="none" strokeLinecap="round">
+          <animate attributeName="d" values="M30,20 Q45,30 50,50; M30,20 Q48,35 52,55; M30,20 Q45,30 50,50" dur="3s" repeatCount="indefinite"/>
+        </path>
+        
+        <circle cx="-50" cy="50" r="8" fill="url(#skinGrad)">
+          <animate attributeName="cy" values="50;55;50" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="50" cy="50" r="8" fill="url(#skinGrad)">
+          <animate attributeName="cy" values="50;55;50" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        
+        <path d="M-5,10 Q-15,0 -20,-10" stroke="#0d9488" strokeWidth="3" fill="none" strokeLinecap="round">
+          <animate attributeName="d" values="M-5,10 Q-15,0 -20,-10; M-5,10 Q-18,-2 -22,-12; M-5,10 Q-15,0 -20,-10" dur="2s" repeatCount="indefinite"/>
+        </path>
+        <circle cx="-20" cy="-14" r="6" fill="#0d9488" opacity="0.8">
+          <animate attributeName="r" values="6;5;6" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="-20" cy="-14" r="3" fill="#fff" opacity="0.6"/>
+        
+        <circle cx="0" cy="-25" r="22" fill="url(#skinGrad)">
+          <animate attributeName="cy" values="-25;-27;-25" dur="5s" repeatCount="indefinite"/>
+        </circle>
+        
+        <path d="M-22,-40 Q0,-55 22,-40 Q20,-30 -20,-30 Z" fill="#374151">
+          <animate attributeName="d" values="M-22,-40 Q0,-55 22,-40 Q20,-30 -20,-30 Z; M-22,-40 Q0,-52 22,-40 Q20,-30 -20,-30 Z; M-22,-40 Q0,-55 22,-40 Q20,-30 -20,-30 Z" dur="4s" repeatCount="indefinite"/>
+        </path>
+        
+        <ellipse cx="-8" cy="-28" rx="3" ry="4" fill="#1f2937">
+          <animate attributeName="ry" values="4;1;4" dur="4s" repeatCount="indefinite" begin="0s"/>
+        </ellipse>
+        <ellipse cx="8" cy="-28" rx="3" ry="4" fill="#1f2937">
+          <animate attributeName="ry" values="4;1;4" dur="4s" repeatCount="indefinite" begin="0s"/>
+        </ellipse>
+        <circle cx="-7" cy="-30" r="1" fill="#fff" opacity="0.8">
+          <animate attributeName="ry" values="1;0.2;1" dur="4s" repeatCount="indefinite" begin="0s"/>
+        </circle>
+        <circle cx="9" cy="-30" r="1" fill="#fff" opacity="0.8">
+          <animate attributeName="ry" values="1;0.2;1" dur="4s" repeatCount="indefinite" begin="0s"/>
+        </circle>
+        
+        <g stroke="#374151" strokeWidth="1.5" fill="none">
+          <circle cx="-8" cy="-28" r="6">
+            <animate attributeName="r" values="6;5.5;6" dur="4s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="8" cy="-28" r="6">
+            <animate attributeName="r" values="6;5.5;6" dur="4s" repeatCount="indefinite"/>
+          </circle>
+          <line x1="2" y1="-28" x2="14" y2="-28"/>
+        </g>
+        
+        <path d="M-6,-18 Q0,-15 6,-18" stroke="#1f2937" strokeWidth="2" fill="none" strokeLinecap="round">
+          <animate attributeName="d" values="M-6,-18 Q0,-15 6,-18; M-6,-18 Q0,-13 6,-18; M-6,-18 Q0,-15 6,-18" dur="3s" repeatCount="indefinite"/>
+        </path>
+      </g>
+      
+      <g className="nurse" transform="translate(220,150)">
+        <animateTransform attributeName="transform" type="translate" values="220,150; 215,145; 220,150" dur="4.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1"/>
+        
+        <path d="M-25,10 Q-32,40 -25,80 Q-15,100 -5,100 L5,100 Q15,100 25,80 Q32,40 25,10 Z" fill="url(#scrubsGrad)">
+          <animate attributeName="d" values="M-25,10 Q-32,40 -25,80 Q-15,100 -5,100 L5,100 Q15,100 25,80 Q32,40 25,10 Z; M-25,10 Q-30,42 -25,82 Q-15,102 -5,102 L5,102 Q15,102 25,82 Q30,42 25,10 Z; M-25,10 Q-32,40 -25,80 Q-15,100 -5,100 L5,100 Q15,100 25,80 Q32,40 25,10 Z" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1"/>
+        </path>
+        
+        <path d="M-25,20 Q-40,35 -45,55" stroke="url(#scrubsGrad)" strokeWidth="10" fill="none" strokeLinecap="round">
+          <animate attributeName="d" values="M-25,20 Q-40,35 -45,55; M-25,20 Q-42,38 -48,58; M-25,20 Q-40,35 -45,55" dur="2.8s" repeatCount="indefinite"/>
+        </path>
+        <path d="M25,20 Q40,35 45,55" stroke="url(#scrubsGrad)" strokeWidth="10" fill="none" strokeLinecap="round">
+          <animate attributeName="d" values="M25,20 Q40,35 45,55; M25,20 Q42,38 48,58; M25,20 Q40,35 45,55" dur="2.8s" repeatCount="indefinite"/>
+        </path>
+        
+        <circle cx="-45" cy="55" r="7" fill="url(#skinGrad)">
+          <animate attributeName="cy" values="55;60;55" dur="2.8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="45" cy="55" r="7" fill="url(#skinGrad)">
+          <animate attributeName="cy" values="55;60;55" dur="2.8s" repeatCount="indefinite"/>
+        </circle>
+        
+        <g transform="translate(45,55)">
+          <rect x="-8" y="-30" width="16" height="28" rx="2" fill="#fff" stroke="#0d9488" strokeWidth="1.5">
+            <animate attributeName="y" values="-30;-28;-30" dur="2.8s" repeatCount="indefinite"/>
+          </rect>
+          <line x1="0" y1="-25" x2="0" y2="-10" stroke="#0d9488" strokeWidth="1.5" strokeDasharray="3,2">
+            <animate attributeName="y1" values="-25;-23;-25" dur="2.8s" repeatCount="indefinite"/>
+          </line>
+        </g>
+        
+        <circle cx="0" cy="-25" r="20" fill="url(#skinGrad)">
+          <animate attributeName="cy" values="-25;-27;-25" dur="4.5s" repeatCount="indefinite"/>
+        </circle>
+        
+        <path d="M-18,-40 Q0,-50 18,-40 Q15,-30 -15,-30 Z" fill="#374151"/>
+        <path d="M12,-40 Q25,-20 20,10 Q15,5 10,5 Z" fill="#374151">
+          <animateTransform attributeName="transform" type="rotate" values="-5;5;-5" dur="2s" repeatCount="indefinite" transformOrigin="12,-40"/>
+        </path>
+        
+        <ellipse cx="-7" cy="-28" rx="2.5" ry="3.5" fill="#1f2937">
+          <animate attributeName="ry" values="3.5;0.8;3.5" dur="3.5s" repeatCount="indefinite"/>
+        </ellipse>
+        <ellipse cx="7" cy="-28" rx="2.5" ry="3.5" fill="#1f2937">
+          <animate attributeName="ry" values="3.5;0.8;3.5" dur="3.5s" repeatCount="indefinite"/>
+        </ellipse>
+        
+        <path d="M-5,-18 Q0,-14 5,-18" stroke="#1f2937" strokeWidth="2" fill="none" strokeLinecap="round">
+          <animate attributeName="d" values="M-5,-18 Q0,-14 5,-18; M-5,-18 Q0,-12 5,-18; M-5,-18 Q0,-14 5,-18" dur="3s" repeatCount="indefinite"/>
+        </path>
+        
+        <path d="M-18,-38 Q0,-50 18,-38 L18,-35 Q0,-45 -18,-35 Z" fill="#fff" stroke="#0d9488" strokeWidth="1.5">
+          <animate attributeName="d" values="M-18,-38 Q0,-50 18,-38 L18,-35 Q0,-45 -18,-35 Z; M-18,-38 Q0,-48 18,-38 L18,-35 Q0,-43 -18,-35 Z; M-18,-38 Q0,-50 18,-38 L18,-35 Q0,-45 -18,-35 Z" dur="3s" repeatCount="indefinite"/>
+        </path>
+        <circle cx="0" cy="-48" r="6" fill="#0d9488" opacity="0.8"/>
+        <circle cx="0" cy="-48" r="3" fill="#fff" opacity="0.8"/>
+      </g>
+      
+      <g className="doctor-2" transform="translate(150,100)" opacity="0.7">
+        <animateTransform attributeName="transform" type="translate" values="150,100; 155,95; 150,100" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1"/>
+        
+        <path d="M-20,0 Q-28,25 -20,55 Q-12,70 -4,70 L4,70 Q12,70 20,55 Q28,25 20,0 Z" fill="url(#coatGrad)"/>
+        <path d="M-10,0 Q-10,15 -5,30 L5,30 Q10,15 10,0 Z" fill="#e8f0fe"/>
+        <path d="M-1,5 L-3,20 L1,20 L3,5 Z" fill="#0d9488"/>
+        
+        <path d="M-20,10 Q-32,20 -35,35" stroke="url(#coatGrad)" strokeWidth="10" fill="none" strokeLinecap="round"/>
+        <path d="M20,10 Q32,20 35,35" stroke="url(#coatGrad)" strokeWidth="10" fill="none" strokeLinecap="round"/>
+        
+        <circle cx="-35" cy="35" r="6" fill="url(#skinGrad)"/>
+        <circle cx="35" cy="35" r="6" fill="url(#skinGrad)"/>
+        
+        <g transform="translate(-35,35)">
+          <rect x="-8" y="-20" width="16" height="22" rx="3" fill="#fff" stroke="#0d9488" strokeWidth="1"/>
+          <rect x="-4" y="-16" width="8" height="14" rx="2" fill="#0d9488" opacity="0.1"/>
+          <line x1="0" y1="-14" x2="0" y2="2" stroke="#0d9488" strokeWidth="1" strokeDasharray="2,2"/>
+        </g>
+        
+        <circle cx="0" cy="-30" r="18" fill="url(#skinGrad)"/>
+        
+        <path d="M-18,-42 Q0,-52 18,-42 Q15,-35 -15,-35 Z" fill="#1f2937"/>
+        
+        <ellipse cx="-6" cy="-32" rx="2" ry="3" fill="#1f2937">
+          <animate attributeName="ry" values="3;0.5;3" dur="4s" repeatCount="indefinite" begin="0.5s"/>
+        </ellipse>
+        <ellipse cx="6" cy="-32" rx="2" ry="3" fill="#1f2937">
+          <animate attributeName="ry" values="3;0.5;3" dur="4s" repeatCount="indefinite" begin="0.5s"/>
+        </ellipse>
+        <path d="M-4,-24 Q0,-21 4,-24" stroke="#1f2937" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+      </g>
+      
+      <g className="floating-icons">
+        <g transform="translate(50,50)">
+          <animateTransform attributeName="transform" type="translate" values="50,50; 55,40; 50,50" dur="4s" repeatCount="indefinite"/>
+          <path d="M0,-5 Q-5,-10 -10,-5 Q-5,0 0,8 Q5,0 10,-5 Q5,-10 0,-5 Z" fill="#ef4444" opacity="0.6">
+            <animate attributeName="d" values="M0,-5 Q-5,-10 -10,-5 Q-5,0 0,8 Q5,0 10,-5 Q5,-10 0,-5 Z; M0,-5 Q-6,-12 -12,-6 Q-6,0 0,10 Q6,0 12,-6 Q6,-12 0,-5 Z; M0,-5 Q-5,-10 -10,-5 Q-5,0 0,8 Q5,0 10,-5 Q5,-10 0,-5 Z" dur="1.5s" repeatCount="indefinite"/>
+          </path>
+        </g>
+        
+        <g transform="translate(250,50)">
+          <animateTransform attributeName="transform" type="translate" values="250,50; 245,40; 250,50" dur="3.5s" repeatCount="indefinite"/>
+          <rect x="-3" y="-12" width="6" height="24" rx="3" fill="#0d9488" opacity="0.6"/>
+          <rect x="-12" y="-3" width="24" height="6" rx="3" fill="#0d9488" opacity="0.6"/>
+        </g>
+        
+        <g transform="translate(50,250)">
+          <animateTransform attributeName="transform" type="translate" values="50,250; 45,240; 50,250" dur="4.2s" repeatCount="indefinite"/>
+          <rect x="-2" y="-20" width="4" height="30" rx="2" fill="#9ca3af" opacity="0.7"/>
+          <rect x="-6" y="-22" width="12" height="6" rx="3" fill="#6b7280" opacity="0.7"/>
+          <polygon points="0,-20 -4,-30 4,-30" fill="#3b82f6" opacity="0.8"/>
+        </g>
+        
+        <g transform="translate(250,250)">
+          <animateTransform attributeName="transform" type="translate" values="250,250; 255,240; 250,250" dur="3.8s" repeatCount="indefinite"/>
+          <rect x="-10" y="-8" width="20" height="16" rx="4" fill="#fef3c7" opacity="0.8" stroke="#f59e0b" strokeWidth="1"/>
+          <rect x="-3" y="-12" width="6" height="24" rx="3" fill="#fff" opacity="0.9"/>
+          <rect x="-12" y="-3" width="24" height="6" rx="3" fill="#fff" opacity="0.9"/>
+        </g>
+        
+        <g transform="translate(150,30)">
+          <animateTransform attributeName="transform" type="translate" values="150,30; 155,25; 150,30" dur="3s" repeatCount="indefinite"/>
+          <ellipse rx="10" ry="6" fill="#0d9488" opacity="0.5">
+            <animate attributeName="ry" values="6;5;6" dur="1.5s" repeatCount="indefinite"/>
+          </ellipse>
+          <rect x="-4" y="-4" width="8" height="8" rx="2" fill="#fff" opacity="0.3"/>
+        </g>
+        
+        <g transform="translate(150,270)">
+          <animateTransform attributeName="transform" type="translate" values="150,270; 145,265; 150,270" dur="3.5s" repeatCount="indefinite"/>
+          <ellipse rx="8" ry="5" fill="#06b6d4" opacity="0.5">
+            <animate attributeName="rx" values="8;7;8" dur="1.8s" repeatCount="indefinite"/>
+          </ellipse>
+          <line x1="-3" y1="0" x2="3" y2="0" stroke="#fff" strokeWidth="1.5" opacity="0.5"/>
+        </g>
+      </g>
+      
+      <g className="pulse-line" stroke="#0d9488" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.4">
+        <path d="M10,10 Q50,10 90,10 Q130,10 170,10 Q210,10 250,10 Q290,10 300,10">
+          <animate attributeName="strokeDasharray" values="10,5; 5,10; 10,5" dur="1s" repeatCount="indefinite"/>
+          <animate attributeName="strokeDashoffset" values="0;-50;0" dur="2s" repeatCount="indefinite"/>
+        </path>
+        <path d="M50,10 L50,-20 L60,10 L70,-30 L80,10" stroke="#ef4444" strokeWidth="2" fill="none" opacity="0.6">
+          <animate attributeName="d" values="M50,10 L50,-20 L60,10 L70,-30 L80,10; M150,10 L150,-20 L160,10 L170,-30 L180,10; M250,10 L250,-20 L260,10 L270,-30 L280,10; M50,10 L50,-20 L60,10 L70,-30 L80,10" dur="4s" repeatCount="indefinite"/>
+        </path>
+      </g>
+    </svg>
+  );
+}
