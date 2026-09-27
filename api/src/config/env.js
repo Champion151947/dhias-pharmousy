@@ -32,6 +32,26 @@ if (isProd && jwtSecret.length < 32) {
   );
 }
 
+/**
+ * The development admin password is intentionally a weak, well-known value so
+ * a fresh clone is usable with zero setup. It is never accepted in production:
+ * the store refuses to seed an admin account unless a strong password is
+ * supplied through the environment, so a public repository cannot hand out a
+ * working admin login.
+ */
+const DEMO_ADMIN_PASSWORD = 'Admin@12345';
+const adminPassword = process.env.ADMIN_PASSWORD?.trim() || '';
+const hasStrongAdminPassword =
+  adminPassword.length >= 12 && adminPassword !== DEMO_ADMIN_PASSWORD;
+
+if (isProd && !hasStrongAdminPassword) {
+  throw new Error(
+    'ADMIN_PASSWORD must be set to at least 12 characters in production and ' +
+      'must not be the development default. Generate a strong one with: ' +
+      'node -e "console.log(require(\'crypto\').randomBytes(18).toString(\'base64url\'))"',
+  );
+}
+
 export const config = {
   env: process.env.NODE_ENV ?? 'development',
   isProd,
@@ -54,9 +74,10 @@ export const config = {
     jwtSecret: jwtSecret || 'insecure-development-only-secret-change-me',
     jwtExpiresIn: process.env.JWT_EXPIRES_IN?.trim() || '7d',
     bcryptRounds: num(process.env.BCRYPT_ROUNDS, 10),
+    hasStrongAdminPassword,
     admin: {
       email: (process.env.ADMIN_EMAIL?.trim() || 'admin@dhiaspharmousy.in').toLowerCase(),
-      password: process.env.ADMIN_PASSWORD?.trim() || 'Admin@12345',
+      password: hasStrongAdminPassword ? adminPassword : DEMO_ADMIN_PASSWORD,
       phone: (process.env.ADMIN_PHONE?.trim() || '9142225559').replace(/\D/g, ''),
     },
     google: {

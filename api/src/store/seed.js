@@ -112,6 +112,14 @@ export async function buildSeedData() {
   }));
 
   const admin = config.auth.admin;
+
+  // The demo customer's password is a constant in this file, so seeding it in
+  // production would publish a working login for anyone who clones the repo.
+  // It only ever exists in development. The admin is always created, and in
+  // production `config` has already refused to boot unless ADMIN_PASSWORD was a
+  // strong value from the environment.
+  const seedDemoCustomer = config.isDev;
+
   const usersRows = [
     {
       id: 1,
@@ -126,39 +134,45 @@ export async function buildSeedData() {
       created_at: stamped(60 * 24 * 30),
       updated_at: stamped(60 * 24 * 30),
     },
-    {
-      id: 2,
-      name: 'Demo Customer',
-      email: 'customer@example.com',
-      phone: '9000000001',
-      password_hash: await bcrypt.hash('Customer@123', config.auth.bcryptRounds),
-      role: 'customer',
-      phone_verified: true,
-      is_active: true,
-      last_login_at: null,
-      created_at: stamped(60 * 24 * 20),
-      updated_at: stamped(60 * 24 * 20),
-    },
+    ...(seedDemoCustomer
+      ? [
+          {
+            id: 2,
+            name: 'Demo Customer',
+            email: 'customer@example.com',
+            phone: '9000000001',
+            password_hash: await bcrypt.hash('Customer@123', config.auth.bcryptRounds),
+            role: 'customer',
+            phone_verified: true,
+            is_active: true,
+            last_login_at: null,
+            created_at: stamped(60 * 24 * 20),
+            updated_at: stamped(60 * 24 * 20),
+          },
+        ]
+      : []),
   ];
 
-  const addressesRows = [
-    {
-      id: 1,
-      user_id: 2,
-      label: 'Home',
-      full_name: 'Demo Customer',
-      phone: '9000000001',
-      line1: '12, West Street',
-      line2: null,
-      landmark: 'Near Bus Stand',
-      city: 'Thisuur',
-      district: 'Ollur',
-      state: 'Tamil Nadu',
-      pincode: '682310',
-      is_default: true,
-      created_at: stamped(60 * 24 * 20),
-    },
-  ];
+  const addressesRows = seedDemoCustomer
+    ? [
+        {
+          id: 1,
+          user_id: 2,
+          label: 'Home',
+          full_name: 'Demo Customer',
+          phone: '9000000001',
+          line1: '12, West Street',
+          line2: null,
+          landmark: 'Near Bus Stand',
+          city: 'Thisuur',
+          district: 'Ollur',
+          state: 'Tamil Nadu',
+          pincode: '682310',
+          is_default: true,
+          created_at: stamped(60 * 24 * 20),
+        },
+      ]
+    : [];
 
   const counters = Object.fromEntries(
     [
