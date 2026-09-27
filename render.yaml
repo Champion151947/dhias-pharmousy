@@ -1,7 +1,7 @@
 # Render blueprint: https://render.com/docs/blueprint-spec
 #
-# Deploy with:  gh render blueprint launch  (or "New > Blueprint" in the
-# dashboard and point it at this repository).
+# Deploy by clicking the "Deploy to Render" button in README.md, or in the
+# dashboard: New > Blueprint > Connect this repo > Deploy Blueprint.
 #
 # ---------------------------------------------------------------------------
 # READ THIS BEFORE YOU ENABLE FREE LIVE ORDERS

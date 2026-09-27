@@ -132,16 +132,18 @@ choice — put a real database behind `api/src/store/index.js` instead.
 
 ## Deploying
 
-### As a public demo (one command, no card, no password)
+### As a public demo (one click, no card, no password)
 
-```bash
-gh render blueprint launch
-```
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Champion151947/dhias-pharmousy)
 
-`render.yaml` is fully zero-config: Render generates `JWT_SECRET` and every
-other variable has a default, so nothing is prompted. The command prints your
-live `onrender.com` URL when the build finishes, and the demo accounts above
-work on it immediately.
+Click the button, sign in with GitHub, then press **Deploy**. Render reads
+`render.yaml` from this repo, so there is nothing to configure: it generates
+`JWT_SECRET` itself and every other variable has a default. When the build
+finishes you get a `onrender.com` URL, and the demo accounts above work on it
+immediately.
+
+Prefer the dashboard? **New → Blueprint → Connect** this repo → **Deploy
+Blueprint**.
 
 The free plan has no persistent disk and sleeps when idle, so data resets on
 each deploy. That is fine for a demo, and is why demo mode is the default here.
