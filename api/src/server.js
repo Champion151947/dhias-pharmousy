@@ -3,12 +3,17 @@ import { createApp } from './app.js';
 import { closeStore, count, DATA_FILE, initStore } from './store/index.js';
 
 /**
- * Keeps a fresh clone instantly demo-able: an empty store is seeded on first
+ * Keeps a fresh deployment instantly usable: an empty store is seeded on first
  * boot, so the catalogue is there before anyone opens the site. Set
  * AUTO_SEED=false to manage the data yourself.
+ *
+ * This also runs in production, which is safe because the seed creates no demo
+ * user accounts there: `config` refuses to boot without a strong
+ * ADMIN_PASSWORD, and the seed skips the demo customer outside development. So
+ * a first production boot gets the product catalogue and nothing else.
  */
 async function autoSeedIfEmpty() {
-  if (process.env.AUTO_SEED === 'false' || config.isProd) return;
+  if (process.env.AUTO_SEED === 'false') return;
   if (count('products') > 0) return;
   const { seed } = await import('./store/seed.js');
   await seed();

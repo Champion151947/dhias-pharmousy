@@ -1,0 +1,80 @@
+# Render blueprint: https://render.com/docs/blueprint-spec
+#
+# Deploy with:  gh render blueprint launch  (or "New > Blueprint" in the
+# dashboard and point it at this repository).
+#
+# ---------------------------------------------------------------------------
+# READ THIS BEFORE YOU ENABLE FREE LIVE ORDERS
+# ---------------------------------------------------------------------------
+# The `free` plan below has NO persistent disk and sleeps after ~15 minutes
+# idle. Every restart or deploy therefore resets data/db.json and
+# data/uploads, and the app re-seeds an empty catalogue. Any order,
+# prescription, or patient address taken in the meantime is gone.
+#
+# That is fine for a demo. For a live pharmacy, switch `plan` to `starter`
+# and uncomment the `disk` block at the bottom, or deploy to a host with a
+# real volume and set DATA_DIR to its mount point.
+#
+# You must supply ADMIN_PASSWORD when Render prompts. The app refuses to
+# start in production without a strong one, and it never accepts the
+# development default that appears in the README.
+# ---------------------------------------------------------------------------
+
+services:
+  - type: web
+    name: dhias-pharmousy
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci && npm run build
+    startCommand: node api/src/server.js
+    healthCheckPath: /health
+    autoDeploy: true
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # Render injects this automatically; the app reads it to bind the port.
+      - key: PORT
+        value: 4000
+
+      # Generated fresh for this service. Never shared or committed.
+      - key: JWT_SECRET
+        generateValue: true
+
+      # REQUIRED: Render will prompt you for this value during creation.
+      - key: ADMIN_PASSWORD
+        sync: false
+
+      - key: ADMIN_EMAIL
+        value: admin@dhiaspharmousy.in
+
+      - key: ADMIN_PHONE
+        value: 9142225559
+
+      # Seeds the product catalogue on an empty store. Safe in production: the
+      # seed creates no demo logins, only the admin above.
+      - key: AUTO_SEED
+        value: "true"
+
+      # `console` prints OTPs to the service log. Switch to msg91 or twilio
+      # once you have provider credentials, or real logins will not work.
+      - key: OTP_PROVIDER
+        value: console
+
+      # Shown on invoices and in the storefront footer. Replace these.
+      - key: GSTIN
+        sync: false
+      - key: DRUG_LICENSE_NUMBER
+        sync: false
+
+      # ------------------------------------------------------------------------
+      # Persistent storage. Requires a paid `starter` plan; uncomment together
+      # with changing `plan: free` above. A 1 GB disk is ample for a JSON file
+      # plus prescription uploads.
+      # ------------------------------------------------------------------------
+      # disk:
+      #   name: pharmacy-data
+      #   mountPath: /app/data
+      #   sizeGB: 1
