@@ -3,64 +3,35 @@
 # Deploy by clicking the "Deploy to Render" button in README.md, or in the
 # dashboard: New > Blueprint > Connect this repo > Deploy Blueprint.
 #
-# ---------------------------------------------------------------------------
-# READ THIS BEFORE YOU ENABLE FREE LIVE ORDERS
-# ---------------------------------------------------------------------------
-# The `free` plan below has NO persistent disk and sleeps after ~15 minutes
-# idle. Every restart or deploy therefore resets data/db.json and
-# data/uploads, and the app re-seeds an empty catalogue. Any order,
-# prescription, or patient address taken in the meantime is gone.
+# This file is intentionally minimal. Every setting here is one that is
+# definitely valid on the free plan; a wrong region, an empty env value, or a
+# deprecated field will fail the whole deploy.
 #
-# That is fine for a demo. For a live pharmacy, switch `plan` to `starter`
-# and uncomment the `disk` block at the bottom, or deploy to a host with a
-# real volume and set DATA_DIR to its mount point.
-#
-# You do NOT need to set a password. The blueprint deploys in demo mode, so
-# the site is immediately clickable and the demo accounts below are published
-# in the README. Anyone who reads the source can sign in as admin and edit
-# this data, which is fine for a demo and is why the free plan resets storage.
-#
-# To turn demo mode off later: set ADMIN_PASSWORD to any 12+ character value
-# in the Render dashboard.
-# ---------------------------------------------------------------------------
+# Anything not listed falls back to the app's own built-in default, which is
+# what you want for a demo:
+#   ADMIN_PASSWORD  unset  -> demo mode on, published demo logins work
+#   ADMIN_EMAIL     defaults to admin@dhiaspharmousy.in
+#   DATA_DIR        defaults to <repo>/data  (ephemeral on the free plan)
 
 services:
   - type: web
     name: dhias-pharmousy
     runtime: node
     plan: free
-    region: singapore
     buildCommand: npm ci && npm run build
     startCommand: node api/src/server.js
     healthCheckPath: /health
-    autoDeploy: true
 
     envVars:
       - key: NODE_ENV
         value: production
 
-      # Render injects this automatically; the app reads it to bind the port.
-      - key: PORT
-        value: 4000
-
       # Generated fresh for this service. Never shared or committed.
       - key: JWT_SECRET
         generateValue: true
 
-      # OPTIONAL. Leave blank to stay in demo mode, where the published demo
-      # credentials work and the site is clickable by anyone. Set any 12+
-      # character value to disable demo mode.
-      - key: ADMIN_PASSWORD
-        value: ""
-
-      - key: ADMIN_EMAIL
-        value: admin@dhiaspharmousy.in
-
-      - key: ADMIN_PHONE
-        value: 9142225559
-
-      # Seeds the product catalogue on an empty store. Safe in production: the
-      # seed creates no demo logins, only the admin above.
+      # Seeds the product catalogue on an empty store. Safe in production: in
+      # demo mode the seed creates the two published demo logins, nothing more.
       - key: AUTO_SEED
         value: "true"
 
@@ -69,18 +40,16 @@ services:
       - key: OTP_PROVIDER
         value: console
 
-      # Shown on invoices and in the storefront footer. Replace these.
-      - key: GSTIN
-        value: ""
-      - key: DRUG_LICENSE_NUMBER
-        value: ""
-
-      # ------------------------------------------------------------------------
-      # Persistent storage. Requires a paid `starter` plan; uncomment together
-      # with changing `plan: free` above. A 1 GB disk is ample for a JSON file
-      # plus prescription uploads.
-      # ------------------------------------------------------------------------
-      # disk:
-      #   name: pharmacy-data
-      #   mountPath: /app/data
-      #   sizeGB: 1
+# ---------------------------------------------------------------------------
+# If you outgrow the demo, these are the changes to make (each one costs money,
+# so they are left off by default):
+#
+#   * Persistent data - set `plan: starter` and add:
+#       disk:
+#         name: pharmacy-data
+#         mountPath: <repo>/data
+#         sizeGB: 1
+#
+#   * Turn demo mode off - add an ADMIN_PASSWORD of 12+ characters. The app then
+#     stops creating the demo accounts and uses your password instead.
+# ---------------------------------------------------------------------------
