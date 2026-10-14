@@ -1,4 +1,4 @@
-# Dhiya's Pharmousy
+# Pharmousy
 
 An online pharmacy storefront: product catalogue, cart, COD checkout, phone-OTP
 login, prescription (Rx) uploads, order tracking, and an admin back office.
